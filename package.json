@@ -1,0 +1,14 @@
+{
+  "name": "gistpen",
+  "version": "1.0.0",
+  "description": "A small application that turns your gists in small web sample snippets.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gist"
+  ],
+  "author": "Marius Büscher <marius.buescher@gmx.de>",
+  "license": "MIT"
+}
