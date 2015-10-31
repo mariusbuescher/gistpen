@@ -1,3 +1,5 @@
-'use strict';
+(function() {
+  'use strict';
 
-require('./src/index');
+  require('./src/index');
+});
