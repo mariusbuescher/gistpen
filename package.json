@@ -4,6 +4,7 @@
   "description": "A small application that turns your gists in small web sample snippets.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
