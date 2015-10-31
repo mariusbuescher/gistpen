@@ -13,6 +13,7 @@
   "author": "Marius Büscher <marius.buescher@gmx.de>",
   "license": "MIT",
   "dependencies": {
+    "bell": "^5.4.0",
     "config": "^1.16.0",
     "hapi": "^11.0.3"
   },
