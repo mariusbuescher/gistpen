@@ -1,4 +1,4 @@
-(function() {
+(function( require ) {
   'use strict';
 
   const Config = require( 'config' );
@@ -25,4 +25,4 @@
       console.log( 'Server running at:', server.info.uri );
     } );
   } );
-})();
+})( require );
