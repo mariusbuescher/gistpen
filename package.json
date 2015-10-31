@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint src/**/*.js config/**/*.js index.js"
   },
   "keywords": [
     "gist"
   ],
   "author": "Marius Büscher <marius.buescher@gmx.de>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^1.8.0"
+  }
 }
