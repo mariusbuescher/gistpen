@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var Config = require( 'config' );
-  var Hapi = require( 'hapi' );
+  const Config = require( 'config' );
+  const Hapi = require( 'hapi' );
 
-  var server = new Hapi.Server();
+  const server = new Hapi.Server();
 
   server.connection( {
     port: Number( process.env.PORT ) || Config.server.port
