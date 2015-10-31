@@ -14,8 +14,12 @@
   "license": "MIT",
   "dependencies": {
     "bell": "^5.4.0",
+    "catbox-redis": "^1.0.6",
     "config": "^1.16.0",
-    "hapi": "^11.0.3"
+    "crypto": "0.0.3",
+    "github": "^0.2.4",
+    "hapi": "^11.0.3",
+    "hapi-auth-cookie": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "^1.8.0"

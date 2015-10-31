@@ -4,13 +4,21 @@
   const Config = require( 'config' );
   const Hapi = require( 'hapi' );
 
-  const server = new Hapi.Server();
+  const server = new Hapi.Server({
+    cache: {
+      engine: require('catbox-redis'),
+      host: Config.redis.host,
+      port: Config.redis.port,
+      password: Config.redis.password
+    }
+  });
 
   server.connection( {
     port: Number( process.env.PORT ) || Config.server.port
   } );
 
   server.register( [
+    require('hapi-auth-cookie'),
     require( 'bell' )
   ], function( err ) {
 
@@ -27,20 +35,40 @@
         isSecure: false     // Terrible idea but required if not using HTTPS
     });
 
-    server.route( [
-      { method: 'GET', path: '/', config: {
-          auth: 'github',
-          handler: function( request, reply ) {
+    server.auth.strategy('session', 'cookie', {
+      password: Config.session.encryptionPassword,
+      cookie: Config.session.cookie,
+      redirectTo: '/login',
+      isSecure: false,
+      validateFunc: function(request, session, callback) {
 
-            if (!request.auth.isAuthenticated) {
-              return reply('Authentication failed due to: ' + request.auth.error.message);
-            }
+        request.server.app.cache.get(session.sid, function(err, value, cached, report) {
+          var creds = {
+            id: session.sid,
+            token: value.githubToken,
+          };
 
-            return reply( 'Authentication successful' );
+          if (err) {
+            return callback(err, false);
           }
-        }
-      }
-    ] );
+
+          if (!cached) {
+            return callback(null, false);
+          }
+
+          return callback(null, true, creds);
+        });
+      },
+    });
+
+    server.app.cache = server.cache({
+      segment: 'sessions',
+      expiresIn: Config.session.expires
+    });
+
+    const routes = require( './routes' );
+
+    server.route( routes );
     server.start( function () {
       console.log( 'Server running at:', server.info.uri );
     } );
