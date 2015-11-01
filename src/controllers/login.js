@@ -3,6 +3,8 @@
 
   const Crypto = require('crypto');
 
+  const User = require( '../models/user' );
+
   const github = require( '../utils/github' );
 
   exports.index = {
@@ -32,11 +34,28 @@
           githubUsername: user.login
         };
 
-        request.server.app.cache.set(sessionId, sessionData, 0, function(err) {
+        User.find( {
+          username: user.login
+        }).exec( function( err, user ) {
 
-          request.auth.session.set( { sid: sessionId } );
+          if ( err ) {
+            return reply( err );
+          }
 
-          return reply.redirect(redirectPath);
+          if (user.length === 0) {
+            user = new User({
+              username: sessionData.githubUsername
+            });
+
+            user.save();
+          }
+
+          request.server.app.cache.set(sessionId, sessionData, 0, function(err) {
+
+            request.auth.session.set( { sid: sessionId } );
+
+            return reply.redirect(redirectPath);
+          } );
         } );
       } );
     }

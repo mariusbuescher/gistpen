@@ -4,6 +4,9 @@
   const Config = require( 'config' );
   const Hapi = require( 'hapi' );
 
+  const mongoose = require( 'mongoose' );
+  mongoose.connect( Config.mongodb.url );
+
   const server = new Hapi.Server({
     cache: {
       engine: require('catbox-redis'),

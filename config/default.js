@@ -20,6 +20,10 @@
       expires: 3 * 24 * 60 * 60 * 1000
     },
 
+    mongodb: {
+      url: 'mongodb://localhost/gistpen'
+    },
+
     redis: {
       host: '127.0.0.1',
       port: '6379',

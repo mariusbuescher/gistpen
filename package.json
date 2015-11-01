@@ -27,7 +27,8 @@
     "crypto": "0.0.3",
     "github": "^0.2.4",
     "hapi": "^11.0.3",
-    "hapi-auth-cookie": "^3.1.0"
+    "hapi-auth-cookie": "^3.1.0",
+    "mongoose": "^4.2.3"
   },
   "devDependencies": {
     "eslint": "^1.8.0"
