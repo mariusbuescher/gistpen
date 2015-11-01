@@ -8,6 +8,7 @@ There are some requirements that have to be met for this project.
 
 - node.js v4.2.x
 - redis
+- a GitHub account
 
 ## Set up
 
