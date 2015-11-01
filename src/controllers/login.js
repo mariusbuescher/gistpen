@@ -3,6 +3,8 @@
 
   const Crypto = require('crypto');
 
+  const github = require( '../utils/github' );
+
   exports.index = {
     auth: 'github',
     handler: function( request, reply ) {
@@ -13,16 +15,29 @@
         return reply('Authentication failed due to: ' + request.auth.error.message);
       }
 
-      const sessionId = Crypto.randomBytes(16).toString('hex');
-      const sessionData = {
-        githubToken: request.auth.credentials.token
-      };
+      github.authenticate({
+        type: 'oauth',
+        token: request.auth.credentials.token
+      });
 
-      request.server.app.cache.set(sessionId, sessionData, 0, function(err) {
+      github.user.get({}, function( err, user ) {
 
-        request.auth.session.set( { sid: sessionId } );
+        if ( err ) {
+          return reply( err );
+        }
 
-        return reply.redirect(redirectPath);
+        const sessionId = Crypto.randomBytes(16).toString('hex');
+        const sessionData = {
+          githubToken: request.auth.credentials.token,
+          githubUsername: user.login
+        };
+
+        request.server.app.cache.set(sessionId, sessionData, 0, function(err) {
+
+          request.auth.session.set( { sid: sessionId } );
+
+          return reply.redirect(redirectPath);
+        } );
       } );
     }
   };

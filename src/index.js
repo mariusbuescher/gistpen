@@ -46,6 +46,7 @@
           var creds = {
             id: session.sid,
             token: value.githubToken,
+            username: value.githubUsername
           };
 
           if (err) {
