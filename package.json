@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A small application that turns your gists in small web sample snippets.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mariusbuescher/gistpen.git"
+  },
   "scripts": {
     "start": "node src/index.js",
     "test": "eslint src/**/*.js config/**/*.js index.js"
