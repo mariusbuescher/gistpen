@@ -31,4 +31,35 @@
       });
     }
   };
+
+  exports.show = {
+    auth: {
+      mode: 'required',
+      strategy: 'session',
+    },
+    handler: function( request, reply ) {
+      github.authenticate({
+        type: 'oauth',
+        token: request.auth.credentials.token
+      });
+
+      github.gists.get({
+        id: request.params.id
+      }, function( err, gist ) {
+
+        if ( err ) {
+          reply( err )
+        }
+
+        const files = [];
+
+        for( let filename in gist.files ) {
+          files.push( filename );
+        }
+
+        reply( 'Gist ' + gist.id + ': ' + gist.description + '. Files: ' + files.join(', ') );
+      })
+    }
+  };
+
 })( module, exports, require );
