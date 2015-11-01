@@ -23,7 +23,7 @@
     handler: function( request, reply ) {
 
       github.authenticate({
-        type: "oauth",
+        type: 'oauth',
         token: request.auth.credentials.token
       });
 
