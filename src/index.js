@@ -1,4 +1,4 @@
-(function( require ) {
+(function( module, require ) {
   'use strict';
 
   const Config = require( 'config' );
@@ -14,6 +14,7 @@
   });
 
   server.connection( {
+    host: Config.server.host,
     port: Number( process.env.PORT ) || Config.server.port
   } );
 
@@ -74,4 +75,6 @@
       console.log( 'Server running at:', server.info.uri );
     } );
   } );
-})( require );
+
+  module.exports = server;
+})( module, require );
