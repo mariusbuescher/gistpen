@@ -28,7 +28,9 @@
     "github": "^0.2.4",
     "hapi": "^11.0.3",
     "hapi-auth-cookie": "^3.1.0",
-    "mongoose": "^4.2.3"
+    "mongoose": "^4.2.3",
+    "nunjucks": "^2.1.0",
+    "vision": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "^1.8.0"

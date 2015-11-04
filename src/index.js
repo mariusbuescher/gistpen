@@ -3,6 +3,9 @@
 
   const Config = require( 'config' );
   const Hapi = require( 'hapi' );
+  const Path = require( 'path' );
+
+  const Nunjucks = require( './utils/nunjucks' );
 
   const mongoose = require( 'mongoose' );
   mongoose.connect( Config.mongodb.url );
@@ -23,7 +26,8 @@
 
   server.register( [
     require('hapi-auth-cookie'),
-    require( 'bell' )
+    require( 'bell' ),
+    require( 'vision' )
   ], function( err ) {
 
     if( err ) {
@@ -65,6 +69,16 @@
         });
       },
     });
+
+    const viewPath = Path.join( __dirname, 'views' );
+    const nunjucksEnv = Nunjucks.configure( viewPath );
+
+    server.views( {
+      engines: {
+        njs: Nunjucks
+      },
+      path: Path.join( viewPath, 'templates' )
+    } );
 
     server.app.cache = server.cache({
       segment: 'sessions',
