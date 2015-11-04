@@ -73,7 +73,7 @@
 
         request.auth.session.clear();
 
-        return reply( 'Successfuly logged out' );
+        return reply.view( 'login/logout' );
       });
 
     }

@@ -21,7 +21,9 @@
           return reply( err );
         }
 
-        reply( 'Hello ' + ( user.name || user.login ) );
+        reply.view( 'index/index', {
+          username: user.name || user.login
+        } );
 
       });
     }

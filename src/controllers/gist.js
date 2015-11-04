@@ -22,11 +22,9 @@
           return reply( err );
         }
 
-        const gistsArray = gists.map(function( gist ) {
-          return gist.id;
-        });
-
-        reply( 'Your gists: ' + gistsArray.join(', ') );
+        reply.view( 'gist/index', {
+          gists: gists
+        } );
 
       });
     }
@@ -51,13 +49,9 @@
           reply( err )
         }
 
-        const files = [];
-
-        for( let filename in gist.files ) {
-          files.push( filename );
-        }
-
-        reply( 'Gist ' + gist.id + ': ' + gist.description + '. Files: ' + files.join(', ') );
+        reply.view( 'gist/show', {
+          gist: gist
+        } );
       })
     }
   };
