@@ -14,6 +14,11 @@
       userAgent: 'gistpen'
     },
 
+    sass: {
+      outputStyle: 'compressed',
+      sourceComments: false
+    },
+
     session: {
       encryptionPassword: 'your-custom-password',
       cookie: 'gistpen',
