@@ -1,6 +1,6 @@
 {% extends "layouts/default.njs" %}
 
-{% block pageTitel %}Gist {{ gist.id }}{% endblock %}
+{% block pageTitle %}Gist {{ gist.id }}{% endblock %}
 
 {% block content %}
   <h1>Gist {{ gist.id }}</h1>
