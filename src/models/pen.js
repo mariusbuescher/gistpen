@@ -5,6 +5,7 @@
   const Schema = mongoose.Schema;
 
   const Pen = new Schema({
+    id: Schema.ObjectId,
     user: String,
     gist: String
   });
