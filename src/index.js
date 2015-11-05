@@ -35,12 +35,12 @@
     }
 
     server.auth.strategy('github', 'bell', {
-        provider: 'github',
-        password: Config.github.encryptionPassword,
-        clientId: Config.github.clientId,
-        clientSecret: Config.github.clientSecret,
-        scope: [ 'user:email', 'gist' ],
-        isSecure: false     // Terrible idea but required if not using HTTPS
+      provider: 'github',
+      password: Config.github.encryptionPassword,
+      clientId: Config.github.clientId,
+      clientSecret: Config.github.clientSecret,
+      scope: [ 'user:email', 'gist' ],
+      isSecure: false     // Terrible idea but required if not using HTTPS
     });
 
     server.auth.strategy('session', 'cookie', {
