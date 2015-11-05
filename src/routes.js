@@ -17,6 +17,7 @@
     { method: 'GET', path: '/gist/{id}', config: Gist.show },
 
     { method: 'GET', path: '/pen', config: Pen.index },
+    { method: 'GET', path: '/pen/{id}', config: Pen.show },
     { method: 'GET', path: '/pen/new', config: Pen.new },
     { method: 'POST', path: '/pen', config: Pen.create },
 

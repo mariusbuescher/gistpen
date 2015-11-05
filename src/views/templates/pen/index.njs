@@ -5,7 +5,7 @@
 {% block content %}
 <ul>
 {% for pen in pens %}
-  <li>{{ pen.user }}: {{ pen.gist }}</li>
+  <li><a href="/pen/{{ pen._id }}">{{ pen.user }}: {{ pen.gist }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

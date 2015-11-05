@@ -19,6 +19,38 @@
     }
   };
 
+  exports.show = {
+    auth: {
+      mode: 'required',
+      strategy: 'session',
+    },
+    handler: function( request, reply ) {
+      github.authenticate({
+        type: 'oauth',
+        token: request.auth.credentials.token
+      });
+
+      Pen.findById( request.params.id ).exec().then(function( pen ) {
+        github.gists.get({
+          id: pen.gist
+        }, function( err, gist ) {
+
+          if ( err ) {
+            return reply( err )
+          }
+
+          reply.view( 'pen/show', {
+            pen: {
+              title: gist.description,
+              files: gist.files,
+              author: pen.user
+            }
+          } );
+        })
+      });
+    }
+  }
+
   exports.new = {
     auth: {
       mode: 'required',
