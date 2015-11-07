@@ -62,7 +62,7 @@
           }
 
           if (!cached) {
-            return callback(null, false);
+            return callback(null, false, {});
           }
 
           return callback(null, true, creds);
