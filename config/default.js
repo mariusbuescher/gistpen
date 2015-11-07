@@ -7,6 +7,8 @@
       port: 3000
     },
 
+    production: true,
+
     github: {
       clientId: 'your-client-id-here',
       clientSecret: 'your-client-secret-here',
@@ -17,6 +19,10 @@
     sass: {
       outputStyle: 'compressed',
       sourceComments: false
+    },
+
+    assets: {
+      expires: 7 * 24 * 60 * 60 * 1000
     },
 
     session: {

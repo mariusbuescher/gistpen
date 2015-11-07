@@ -85,6 +85,11 @@
       expiresIn: Config.session.expires
     });
 
+    server.app.assetsCache = server.cache({
+      segment: 'assets',
+      expiresIn: Config.assets.expires
+    });
+
     const routes = require( './routes' );
 
     server.route( routes );
