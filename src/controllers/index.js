@@ -4,25 +4,19 @@
   const github = require( '../utils/github' );
 
   exports.index = {
-    auth: {
-      mode: 'required',
-      strategy: 'session',
-    },
     handler: function( request, reply ) {
 
-      github.authenticate({
-        type: 'oauth',
-        token: request.auth.credentials.token
-      });
-
-      const user = github.user.get({}, function ( err, user ) {
+      request.server.auth.test( 'session', request, function( err, credentials ) {
 
         if ( err ) {
-          return reply( err );
+          return reply.view( 'index/index', {
+            authenticated: false
+          } );
         }
 
         reply.view( 'index/index', {
-          username: user.name || user.login
+          authenticated: true,
+          username: credentials.username
         } );
 
       });
