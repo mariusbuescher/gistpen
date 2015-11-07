@@ -1,4 +1,4 @@
-{% extends "layouts/default.njs" %}
+{% extends "page/layouts/default.njs" %}
 
 {% block pageTitle %}Gist {{ gist.id }}{% endblock %}
 

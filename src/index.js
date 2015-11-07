@@ -70,14 +70,14 @@
       },
     });
 
-    const viewPath = Path.join( __dirname, 'views' );
+    const viewPath = Path.join( __dirname, 'resources/components' );
     const nunjucksEnv = Nunjucks.configure( viewPath );
 
     server.views( {
       engines: {
         njs: Nunjucks
       },
-      path: Path.join( viewPath, 'templates' )
+      path: Path.join( viewPath, 'page/templates' )
     } );
 
     server.app.cache = server.cache({
