@@ -4,6 +4,9 @@
   const Config = require( 'config' );
 
   exports.css = {
+    cache: {
+      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0
+    },
     handler: function( request, reply ) {
       const Sass = require( 'node-sass' );
       const Path = require( 'path' );

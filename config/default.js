@@ -23,6 +23,7 @@
 
     assets: {
       expires: 7 * 24 * 60 * 60 * 1000,
+      clientCacheTTL: 365 * 24 * 60 * 60 * 1000,
       version: '0'
     },
 
