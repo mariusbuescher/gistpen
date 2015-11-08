@@ -71,7 +71,9 @@
     });
 
     const viewPath = Path.join( __dirname, 'resources/components' );
-    const nunjucksEnv = Nunjucks.configure( viewPath );
+    const nunjucksEnv = Nunjucks.configure( viewPath, {
+      noCache: !Config.production
+    } );
 
     nunjucksEnv.addGlobal( 'assetPath', require('./utils/view/functions/assets-path') );
 
