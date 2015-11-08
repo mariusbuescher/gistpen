@@ -2,6 +2,8 @@
   'use strict';
 
   const Config = require( 'config' );
+  const Path = require( 'path' );
+  const Fs = require( 'fs' );
 
   exports.css = {
     cache: {
@@ -43,10 +45,38 @@
 
         return reply( result.css )
           .type('text/css');
-
       } );
-
-
     }
   };
+
+  exports.static = {
+    cache: {
+      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0
+    },
+    handler: function ( request, reply ) {
+
+      if ( request.params.filepath.match(/\.js$/) === null ) {
+        return reply( {
+          statusCode: 404,
+          error: 'Not Found'
+        } )
+          .code(404);
+      }
+
+      const filePath = Path.join( __dirname, '../resources/components/' + request.params.filepath );
+
+      Fs.readFile( filePath, function( err, content ) {
+        if ( err ) {
+          return reply( {
+            statusCode: 404,
+            error: 'Not Found'
+          } )
+            .code(404);
+        }
+
+        reply( content )
+          .type( 'text/javascript' );
+      } );
+    }
+  }
 } )( module, exports, require );
