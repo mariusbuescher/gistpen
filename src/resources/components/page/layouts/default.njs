@@ -9,8 +9,9 @@
 </head>
 <body>
 
-  <nav>
-
+  <nav class="main-navigation">
+  {% block mainNavigation %}
+  {% endblock %}
   </nav>
 
   <main class="main-content">

@@ -10,6 +10,7 @@
 
         if ( err ) {
           return reply.view( 'index/index', {
+            path: request.path,
             authentication: {
               authenticated: false
             }
@@ -17,6 +18,7 @@
         }
 
         reply.view( 'index/index', {
+          path: request.path,
           authentication: {
             authenticated: true,
             username: credentials.username
