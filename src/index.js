@@ -73,6 +73,8 @@
     const viewPath = Path.join( __dirname, 'resources/components' );
     const nunjucksEnv = Nunjucks.configure( viewPath );
 
+    nunjucksEnv.addGlobal( 'assetPath', require('./utils/view/functions/assets-path') );
+
     server.views( {
       engines: {
         njs: Nunjucks

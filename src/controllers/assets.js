@@ -8,7 +8,9 @@
       const Sass = require( 'node-sass' );
       const Path = require( 'path' );
 
-      request.server.app.assetsCache.get(request.params.filename + '.css', function( err, result ) {
+      const assetName = request.params.resourceVersion + '/' + request.params.filename + '.css';
+
+      request.server.app.assetsCache.get( assetName , function( err, result ) {
 
         if ( err ) {
           return reply( err );
@@ -20,8 +22,9 @@
             outputStyle: Config.sass.outputStyle,
             sourceComments: Config.sass.sourceComments
           }, function( err, result ) {
-            request.server.app.assetsCache.set( request.params.filename + '.css', {
-              css: result.css.toString('utf-8')
+            request.server.app.assetsCache.set( assetName, {
+              css: result.css.toString('utf-8'),
+              version: request.params.resourceVersion
             } );
             reply( result.css )
               .type('text/css');

@@ -21,7 +21,7 @@
     { method: 'GET', path: '/pen/new', config: Pen.new },
     { method: 'POST', path: '/pen', config: Pen.create },
 
-    { method: 'GET', path: '/assets/{filename}.css', config: Assets.css }
+    { method: 'GET', path: '/assets/{resourceVersion}/{filename}.css', config: Assets.css }
   ];
 
 })( module, require );

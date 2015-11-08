@@ -5,7 +5,7 @@
 
   <meta charset="utf-8">
 
-  <link rel="stylesheet" type="text/css" href="/assets/main.css" />
+  <link rel="stylesheet" type="text/css" href="{{ assetPath( 'main.css' ) }}" />
 </head>
 <body>
 
