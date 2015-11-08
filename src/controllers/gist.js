@@ -23,6 +23,11 @@
         }
 
         reply.view( 'gist/index', {
+          path: request.path,
+          authenticattion: {
+            authenticated: true,
+            username: request.auth.credentials.username
+          },
           gists: gists
         } );
 
@@ -50,6 +55,11 @@
         }
 
         reply.view( 'gist/show', {
+          path: request.path,
+          authentication: {
+            authenticated: true,
+            username: request.auth.credentials.username
+          },
           gist: gist
         } );
       })

@@ -13,6 +13,11 @@
       const pens = Pen.find().exec();
       pens.then(function( pens ) {
         reply.view( 'pen/index', {
+          path: request.path,
+          authentication: {
+            authenticated: true,
+            username: request.auth.credentials.username
+          },
           pens
         } );
       });
@@ -40,6 +45,11 @@
           }
 
           reply.view( 'pen/show', {
+            path: request.path,
+            authentication: {
+              authenticated: true,
+              username: request.auth.credentials.username
+            },
             pen: {
               title: gist.description,
               files: gist.files,
@@ -57,7 +67,13 @@
       strategy: 'session',
     },
     handler: function( request, reply ) {
-      reply.view( 'pen/new' );
+      reply.view( 'pen/new', {
+        path: request.path,
+        authentication: {
+          authenticated: true,
+          username: request.auth.credentials.username
+        }
+      } );
     }
   };
 
