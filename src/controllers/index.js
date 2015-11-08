@@ -10,14 +10,18 @@
 
         if ( err ) {
           return reply.view( 'index/index', {
-            authenticated: false
-          } );
+            authentication: {
+              authenticated: false
+            }
+          });
         }
 
         reply.view( 'index/index', {
-          authenticated: true,
-          username: credentials.username
-        } );
+          authentication: {
+            authenticated: true,
+            username: credentials.username
+          }
+        });
 
       });
     }

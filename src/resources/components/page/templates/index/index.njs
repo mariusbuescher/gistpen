@@ -3,8 +3,8 @@
 {% block pageTitle %}Home{% endblock %}
 
 {% block content %}
-  {% if authenticated %}
-  <p>Hello {{ username }}!</p>
+  {% if authentication.authenticated %}
+  <p>Hello {{ authentication.username }}!</p>
   {% else %}
   <p>Hello!</p>
   {% endif %}
