@@ -1,1 +1,4 @@
-@import "vendor/reset";
+@import "vendor/**/*.scss";
+
+@import "../pattern/**/*.scss";
+@import "../modules/**/*.scss";

@@ -9,6 +9,7 @@
     },
     handler: function( request, reply ) {
       const Sass = require( 'node-sass' );
+      const sassGlobbing = require( 'node-sass-globbing' );
       const Path = require( 'path' );
 
       const assetName = request.params.resourceVersion + '/' + request.params.filename + '.css';
@@ -21,6 +22,7 @@
 
         if ( !result || Config.production === false ) {
           Sass.render( {
+            importer: sassGlobbing,
             file: Path.join( __dirname, '../resources/components/sass/' + request.params.filename + '.scss' ),
             outputStyle: Config.sass.outputStyle,
             sourceComments: Config.sass.sourceComments

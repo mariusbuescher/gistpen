@@ -30,6 +30,7 @@
     "hapi-auth-cookie": "^3.1.0",
     "mongoose": "^4.2.3",
     "node-sass": "^3.4.1",
+    "node-sass-globbing": "0.0.23",
     "nunjucks": "^2.1.0",
     "vision": "^4.0.0"
   },
