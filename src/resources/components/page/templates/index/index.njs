@@ -2,10 +2,6 @@
 
 {% block pageTitle %}Home{% endblock %}
 
-{% block mainNavigation %}
-  {% include "modules/navigation/main/main.njs" %}
-{% endblock %}
-
 {% block content %}
   {% if authentication.authenticated %}
   <p>Hello {{ authentication.username }}!</p>

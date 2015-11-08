@@ -11,6 +11,7 @@
 
   <nav class="main-navigation">
   {% block mainNavigation %}
+    {% include "modules/navigation/main/main.njs" %}
   {% endblock %}
   </nav>
 
