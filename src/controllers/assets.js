@@ -27,6 +27,10 @@
             outputStyle: Config.sass.outputStyle,
             sourceComments: Config.sass.sourceComments
           }, function( err, result ) {
+            if ( err ) {
+              return reply( err );
+            }
+
             request.server.app.assetsCache.set( assetName, {
               css: result.css.toString('utf-8'),
               version: request.params.resourceVersion
