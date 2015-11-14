@@ -8,7 +8,7 @@
     "url": "git://github.com/mariusbuescher/gistpen.git"
   },
   "scripts": {
-    "start": "node --optimize_for_size --max_old_space_size=920 --gc_interval=100 src/index.js",
+    "start": "node src/index.js",
     "test": "eslint src/**/*.js config/**/*.js index.js"
   },
   "engines": {
