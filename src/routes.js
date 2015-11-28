@@ -22,6 +22,7 @@
     { method: 'POST', path: '/pen', config: Pen.create },
 
     { method: 'GET', path: '/assets/{resourceVersion}/{filename}.css', config: Assets.css },
+    { method: 'GET', path: '/assets/{resourceVersion}/{filename}.js', config: Assets.js },
     { method: 'GET', path: '/assets/{resourceVersion}/{filepath*}', config: Assets.static }
   ];
 

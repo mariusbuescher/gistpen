@@ -49,6 +49,49 @@
     }
   };
 
+  exports.js = {
+    cache: {
+      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0
+    },
+    handler: function ( request, reply ) {
+      const browserify = require( 'browserify' );
+      const Path = require( 'path' );
+
+      const assetName = request.params.resourceVersion + '/' + request.params.filename + '.js';
+
+      request.server.app.assetsCache.get( assetName , function( err, result ) {
+
+        if ( err ) {
+          return reply( err );
+        }
+
+        if ( !result || Config.production === false ) {
+          const b = browserify( Path.join( __dirname, '../resources/components/app/' + request.params.filename + '.js' ) );
+
+          b.bundle( function( err, js ) {
+            if ( err ) {
+              return reply( err );
+            }
+
+            request.server.app.assetsCache.set( assetName, {
+              js: js.toString('utf-8'),
+              version: request.params.resourceVersion
+            } );
+
+            reply( js )
+              .type('text/javascript');
+          } );
+
+          return;
+        }
+
+        return reply( result.js )
+          .type('text/javascript');
+      } );
+
+    }
+  };
+
   exports.static = {
     cache: {
       expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0
