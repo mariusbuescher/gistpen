@@ -27,7 +27,19 @@
   server.register( [
     require('hapi-auth-cookie'),
     require( 'bell' ),
-    require( 'vision' )
+    require( 'vision' ),
+    {
+      register: require( 'good' ),
+      options: {
+        reporters: [
+          {
+            reporter: require( 'good-console' ),
+            events: Config.log.events,
+            config: Config.log.config
+          }
+        ]
+      }
+    }
   ], function( err ) {
 
     if( err ) {
@@ -98,7 +110,7 @@
 
     server.route( routes );
     server.start( function () {
-      console.log( 'Server running at:', server.info.uri );
+      console.info( 'Server running at:', server.info.uri );
     } );
   } );
 

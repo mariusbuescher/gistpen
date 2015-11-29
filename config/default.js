@@ -27,6 +27,11 @@
       version: '0'
     },
 
+    log: {
+      events: { log: '*', response: '*' },
+      config: {}
+    },
+
     session: {
       encryptionPassword: 'your-custom-password',
       cookie: 'gistpen',

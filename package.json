@@ -27,6 +27,8 @@
     "config": "^1.16.0",
     "crypto": "0.0.3",
     "github": "^0.2.4",
+    "good": "^6.4.0",
+    "good-console": "^5.2.0",
     "hapi": "^11.0.3",
     "hapi-auth-cookie": "^3.1.0",
     "mongoose": "^4.2.3",
