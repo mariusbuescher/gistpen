@@ -66,7 +66,9 @@
         }
 
         if ( !result || Config.production === false ) {
-          const b = browserify( Path.join( __dirname, '../resources/components/app/' + request.params.filename + '.js' ) );
+          const b = browserify( Path.join( __dirname, '../resources/components/app/' + request.params.filename + '.js' ), {
+            debug: !Config.production
+          } );
 
           b.bundle( function( err, js ) {
             if ( err ) {
