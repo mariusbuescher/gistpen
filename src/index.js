@@ -110,7 +110,7 @@
 
     server.route( routes );
     server.start( function () {
-      console.info( 'Server running at:', server.info.uri );
+      console.info( 'Server running at [' + server.info.uri + ']' );
     } );
   } );
 
