@@ -21,7 +21,7 @@
 
   server.connection( {
     host: Config.server.host,
-    port: Number( process.env.PORT ) || Config.server.port
+    port: process.env.PORT || Config.server.port
   } );
 
   server.register( [
