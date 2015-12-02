@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "test": "eslint src/**/*.js config/**/*.js"
+    "test": "npm run eslint && npm run unit",
+    "eslint": "eslint src/**/*.js config/**/*.js",
+    "unit": "lab tests/**/*.js -r tap"
   },
   "engines": {
     "node": "4.2.x",
@@ -38,6 +40,9 @@
     "vision": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^1.8.0"
+    "code": "^2.0.1",
+    "eslint": "^1.8.0",
+    "lab": "^7.3.0",
+    "sinon": "^1.17.2"
   }
 }
