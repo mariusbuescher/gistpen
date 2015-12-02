@@ -10,8 +10,8 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "npm run eslint && npm run unit",
-    "eslint": "eslint src/**/*.js config/**/*.js",
-    "unit": "lab tests/**/*.js -r tap"
+    "eslint": "eslint **/*.js",
+    "test": "lab -L -r tap -o stdout -r html -o artifacts/results/coverage.html -c --coverage-path src/ tests/**/*.js"
   },
   "engines": {
     "node": "4.2.x",
