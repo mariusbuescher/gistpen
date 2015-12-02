@@ -1,5 +1,7 @@
 # gistpen
 
+[![Build Status](https://travis-ci.org/mariusbuescher/gistpen.svg?branch=master)](https://travis-ci.org/mariusbuescher/gistpen)
+
 > A small application that turns your gists in small web sample snippets.
 
 ## Requirements
