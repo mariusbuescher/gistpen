@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "test": "eslint src/**/*.js config/**/*.js index.js"
+    "test": "eslint src/**/*.js config/**/*.js"
   },
   "engines": {
     "node": "4.2.x",
