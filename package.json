@@ -11,7 +11,7 @@
     "start": "node src/index.js",
     "test": "npm run eslint && npm run unit",
     "eslint": "eslint **/*.js",
-    "test": "lab -L -r tap -o stdout -r html -o artifacts/results/coverage.html -c --coverage-path src/ tests/**/*.js"
+    "test": "lab -L -r console -o stdout -r html -o artifacts/results/coverage.html -c --coverage-path src/ tests/**/*.js"
   },
   "engines": {
     "node": "4.2.x",
