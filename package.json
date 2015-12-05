@@ -9,9 +9,8 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "test": "npm run eslint && npm run unit",
-    "eslint": "eslint **/*.js",
-    "test": "lab -L -r console -o stdout -r html -o artifacts/results/coverage.html -c --coverage-path src/ tests/**/*.js"
+    "test": "lab -L -r console -o stdout -r html -o artifacts/results/coverage.html -c --coverage-path src/ tests/**/*.js",
+    "eslint": "eslint ."
   },
   "engines": {
     "node": "4.2.x",
@@ -42,6 +41,7 @@
   "devDependencies": {
     "code": "^2.0.1",
     "eslint": "^1.8.0",
+    "eslint-config-airbnb": "^1.0.2",
     "lab": "^7.3.0",
     "sinon": "^1.17.2"
   }
