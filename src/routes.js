@@ -1,4 +1,4 @@
-(function ( module, require ) {
+(function( module, require ) {
   'use strict';
 
   const Index = require( './controllers/index' );
@@ -23,7 +23,6 @@
 
     { method: 'GET', path: '/assets/{resourceVersion}/{filename}.css', config: Assets.css },
     { method: 'GET', path: '/assets/{resourceVersion}/{filename}.js', config: Assets.js },
-    { method: 'GET', path: '/assets/{resourceVersion}/{filepath*}', config: Assets.static }
+    { method: 'GET', path: '/assets/{resourceVersion}/{filepath*}', config: Assets.static },
   ];
-
 })( module, require );

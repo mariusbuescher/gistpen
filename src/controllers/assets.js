@@ -7,7 +7,7 @@
 
   exports.css = {
     cache: {
-      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0
+      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0,
     },
     handler: function( request, reply ) {
       const Sass = require( 'node-sass' );
@@ -16,8 +16,7 @@
 
       const assetName = request.params.resourceVersion + '/' + request.params.filename + '.css';
 
-      request.server.app.assetsCache.get( assetName , function( err, result ) {
-
+      request.server.app.assetsCache.get( assetName, function( err, result ) {
         if ( err ) {
           return reply( err );
         }
@@ -27,7 +26,7 @@
             importer: sassGlobbing,
             file: Path.join( __dirname, '../resources/components/sass/' + request.params.filename + '.scss' ),
             outputStyle: Config.sass.outputStyle,
-            sourceComments: Config.sass.sourceComments
+            sourceComments: Config.sass.sourceComments,
           }, function( err, result ) {
             if ( err ) {
               return reply( err );
@@ -35,39 +34,39 @@
 
             request.server.app.assetsCache.set( assetName, {
               css: result.css.toString('utf-8'),
-              version: request.params.resourceVersion
+              version: request.params.resourceVersion,
             } );
             reply( result.css )
               .type('text/css');
           } );
-          return;
+          return null;
         }
 
         return reply( result.css )
           .type('text/css');
       } );
-    }
+    },
   };
 
   exports.js = {
     cache: {
-      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0
+      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0,
     },
-    handler: function ( request, reply ) {
+    handler: function( request, reply ) {
       const browserify = require( 'browserify' );
       const Path = require( 'path' );
 
       const assetName = request.params.resourceVersion + '/' + request.params.filename + '.js';
 
-      request.server.app.assetsCache.get( assetName , function( err, result ) {
-
+      request.server.app.assetsCache.get( assetName, function( err, result ) {
         if ( err ) {
           return reply( err );
         }
 
         if ( !result || Config.production === false ) {
           const b = browserify( Path.join( __dirname, '../resources/components/app/' + request.params.filename + '.js' ), {
-            debug: !Config.production
+            debug: !Config.production,
+            standalone: 'App',
           } );
 
           b.bundle( function( err, js ) {
@@ -77,33 +76,31 @@
 
             request.server.app.assetsCache.set( assetName, {
               js: js.toString('utf-8'),
-              version: request.params.resourceVersion
+              version: request.params.resourceVersion,
             } );
 
             reply( js )
               .type('text/javascript');
           } );
 
-          return;
+          return null;
         }
 
         return reply( result.js )
           .type('text/javascript');
       } );
-
-    }
+    },
   };
 
   exports.static = {
     cache: {
-      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0
+      expiresIn: ( Config.production === true ) ? Config.assets.clientCacheTTL : 0,
     },
-    handler: function ( request, reply ) {
-
+    handler: function( request, reply ) {
       if ( request.params.filepath.match(/\.js$/) === null ) {
         return reply( {
           statusCode: 404,
-          error: 'Not Found'
+          error: 'Not Found',
         } )
           .code(404);
       }
@@ -114,7 +111,7 @@
         if ( err ) {
           return reply( {
             statusCode: 404,
-            error: 'Not Found'
+            error: 'Not Found',
           } )
             .code(404);
         }
@@ -122,6 +119,6 @@
         reply( content )
           .type( 'text/javascript' );
       } );
-    }
-  }
+    },
+  };
 } )( module, exports, require );

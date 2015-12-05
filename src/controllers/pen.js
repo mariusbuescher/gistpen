@@ -1,4 +1,4 @@
-(function ( module, exports, require ) {
+(function( module, exports, require ) {
   'use strict';
 
   const github = require( '../utils/github' );
@@ -16,12 +16,12 @@
           path: request.path,
           authentication: {
             authenticated: true,
-            username: request.auth.credentials.username
+            username: request.auth.credentials.username,
           },
-          pens
+          pens,
         } );
       });
-    }
+    },
   };
 
   exports.show = {
@@ -32,34 +32,33 @@
     handler: function( request, reply ) {
       github.authenticate({
         type: 'oauth',
-        token: request.auth.credentials.token
+        token: request.auth.credentials.token,
       });
 
       Pen.findById( request.params.id ).exec().then(function( pen ) {
         github.gists.get({
-          id: pen.gist
+          id: pen.gist,
         }, function( err, gist ) {
-
           if ( err ) {
-            return reply( err )
+            return reply( err );
           }
 
           reply.view( 'pen/show', {
             path: request.path,
             authentication: {
               authenticated: true,
-              username: request.auth.credentials.username
+              username: request.auth.credentials.username,
             },
             pen: {
               title: gist.description,
               files: gist.files,
-              author: pen.user
-            }
+              author: pen.user,
+            },
           } );
-        })
+        });
       });
-    }
-  }
+    },
+  };
 
   exports.new = {
     auth: {
@@ -71,10 +70,10 @@
         path: request.path,
         authentication: {
           authenticated: true,
-          username: request.auth.credentials.username
-        }
+          username: request.auth.credentials.username,
+        },
       } );
-    }
+    },
   };
 
   exports.create = {
@@ -85,7 +84,7 @@
     handler: function( request, reply ) {
       github.authenticate({
         type: 'oauth',
-        token: request.auth.credentials.token
+        token: request.auth.credentials.token,
       });
 
       github.gists.create({
@@ -93,33 +92,31 @@
         public: true,
         files: {
           'Readme.md': {
-            content: '# ' + request.payload.title
+            content: '# ' + request.payload.title,
           },
           'index.html': {
-            content: '<!-- your html -->'
+            content: '<!-- your html -->',
           },
           'main.css': {
-            content: '// your css'
+            content: '// your css',
           },
           'main.js': {
-            content: '// your js'
-          }
-        }
+            content: '// your js',
+          },
+        },
       }, function( err, newGist ) {
-
         if ( err ) {
           return reply( err );
         }
 
-        let pen = new Pen({
+        const pen = new Pen({
           user: request.auth.credentials.username,
-          gist: newGist.id
+          gist: newGist.id,
         });
         pen.save();
 
         reply.redirect('/pen');
       } );
-    }
+    },
   };
-
 })( module, exports, require );

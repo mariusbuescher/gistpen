@@ -15,13 +15,13 @@
       engine: require('catbox-redis'),
       host: Config.redis.host,
       port: Config.redis.port,
-      password: Config.redis.password
-    }
+      password: Config.redis.password,
+    },
   });
 
   server.connection( {
     host: Config.server.host,
-    port: process.env.PORT || Config.server.port
+    port: process.env.PORT || Config.server.port,
   } );
 
   server.register( [
@@ -35,15 +35,14 @@
           {
             reporter: require( 'good-console' ),
             events: Config.log.events,
-            config: Config.log.config
-          }
-        ]
-      }
-    }
+            config: Config.log.config,
+          },
+        ],
+      },
+    },
   ], function( err ) {
-
-    if( err ) {
-        throw err;
+    if ( err ) {
+      throw err;
     }
 
     server.auth.strategy('github', 'bell', {
@@ -52,7 +51,7 @@
       clientId: Config.github.clientId,
       clientSecret: Config.github.clientSecret,
       scope: [ 'user:email', 'gist' ],
-      isSecure: false     // Terrible idea but required if not using HTTPS
+      isSecure: false,     // Terrible idea but required if not using HTTPS
     });
 
     server.auth.strategy('session', 'cookie', {
@@ -61,12 +60,11 @@
       redirectTo: '/login',
       isSecure: false,
       validateFunc: function(request, session, callback) {
-
-        request.server.app.cache.get(session.sid, function(err, value, cached, report) {
-          var creds = {
+        request.server.app.cache.get(session.sid, function cacheCb(err, value, cached) {
+          const creds = {
             id: session.sid,
             token: value.githubToken,
-            username: value.githubUsername
+            username: value.githubUsername,
           };
 
           if (err) {
@@ -84,32 +82,32 @@
 
     const viewPath = Path.join( __dirname, 'resources/components' );
     const nunjucksEnv = Nunjucks.configure( viewPath, {
-      noCache: !Config.production
+      noCache: !Config.production,
     } );
 
     nunjucksEnv.addGlobal( 'assetPath', require('./utils/view/functions/assets-path') );
 
     server.views( {
       engines: {
-        njs: Nunjucks
+        njs: Nunjucks,
       },
-      path: Path.join( viewPath, 'page/templates' )
+      path: Path.join( viewPath, 'page/templates' ),
     } );
 
     server.app.cache = server.cache({
       segment: 'sessions',
-      expiresIn: Config.session.expires
+      expiresIn: Config.session.expires,
     });
 
     server.app.assetsCache = server.cache({
       segment: 'assets',
-      expiresIn: Config.assets.expires
+      expiresIn: Config.assets.expires,
     });
 
     const routes = require( './routes' );
 
     server.route( routes );
-    server.start( function () {
+    server.start( function startCb() {
       console.info( 'Server running at [' + server.info.uri + ']' );
     } );
   } );

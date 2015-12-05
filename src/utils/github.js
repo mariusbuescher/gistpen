@@ -11,10 +11,9 @@
     host: 'api.github.com', // should be api.github.com for GitHub
     timeout: 5000,
     headers: {
-        'user-agent': Config.github.userAgent
-    }
+      'user-agent': Config.github.userAgent,
+    },
   });
 
   module.exports = github;
-
 })( module, require );

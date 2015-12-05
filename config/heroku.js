@@ -4,24 +4,23 @@
   module.exports = {
     server: {
       host: '0.0.0.0',
-      port: process.env.PORT
+      port: process.env.PORT,
     },
 
     redis: {
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
-      password: process.env.REDIS_PASSWORD
+      password: process.env.REDIS_PASSWORD,
     },
 
     mongodb: {
-      url: process.env.MONGOLAB_URI
+      url: process.env.MONGOLAB_URI,
     },
 
     github: {
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      encryptionPassword: process.env.GITHUB_ENCRYPTION_PASSWORD
-    }
+      encryptionPassword: process.env.GITHUB_ENCRYPTION_PASSWORD,
+    },
   };
-
 })( module, process );

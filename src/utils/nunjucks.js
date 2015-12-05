@@ -1,4 +1,4 @@
-( function ( module, require ) {
+( function( module, require ) {
   'use strict';
 
   const Nunjucks = require( 'nunjucks' );
@@ -12,8 +12,8 @@
 
       if ( env === undefined ) {
         err = {
-          message: 'You did not call the configure method. Please call it to generate a nunjucks environment'
-        }
+          message: 'You did not call the configure method. Please call it to generate a nunjucks environment',
+        };
       }
 
       callback( err, function( context, options, next ) {
@@ -22,10 +22,11 @@
     } else {
       return function( context ) {
         if ( env === undefined ) {
-          throw 'You did not call the configure method. Please call it to generate a nunjucks environment';
+          const err = { message: 'You did not call the configure method. Please call it to generate a nunjucks environment' };
+          throw err;
         }
         return env.renderString( template, context );
-      }
+      };
     }
   };
 
@@ -33,5 +34,4 @@
     env = Nunjucks.configure( path, options );
     return env;
   };
-
 } )( module, require );

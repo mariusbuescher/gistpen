@@ -7,7 +7,7 @@
   const Pen = new Schema({
     id: Schema.ObjectId,
     user: String,
-    gist: String
+    gist: String,
   });
 
   module.exports = mongoose.model( 'Pen', Pen );
