@@ -747,9 +747,9 @@
             app: {
               cache: {
                 drop: function( id, cb ) {
-                  cb( null );
-                  mockReply.verify();
+                  cb( undefined );
                   mockSession.verify();
+                  mockReply.verify();
                   done();
                 },
               },
@@ -765,7 +765,6 @@
 
         const loginController = require( '../../src/controllers/login.js' );
         loginController.logout.handler( fakeRequest, fakeReply );
-        done();
       } );
     } );
   } );
