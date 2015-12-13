@@ -73,7 +73,6 @@
         request.auth.session.clear();
 
         return reply.view( 'login/logout', {
-          path: request.path,
           authentication: {
             authenticated: false,
           },
